@@ -23,3 +23,10 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## 截图
 ![p1.png](https://github.com/longxiaoyun/MessageUI/blob/master/p1.png)
+
+
+## 说明 :blush:
+- 拖动 
+- 缩放
+- 发送消息
+- 改变颜色
