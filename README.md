@@ -1,6 +1,7 @@
 # message-ui
 
 > A Vue.js project
+> 简单聊天框界面ui，左侧联系人列表可以收起，不算完成版
 
 ## Build Setup
 
