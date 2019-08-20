@@ -1,7 +1,4 @@
 <template>
-<!-- 参考 https://zhuanlan.zhihu.com/p/32878390-->
-<!--  https://segmentfault.com/q/1010000012001151-->
-<!--  https://www.w3schools.com/howto/howto_css_chat.asp-->
   <div id="message-container" v-drag>
     <!--  the start  -->
     <section class="theme-color header-container">
@@ -138,7 +135,7 @@ export default {
             y = el_y;
             w = el_w;
             h = el_h;
-            console.log(x,y,w,h)
+            // console.log(x,y,w,h)
             cx_start = e.clientX;
             cy_start = e.clientY;
             //绑定移动事件
@@ -233,7 +230,13 @@ export default {
     scrollToBottom:function() {
       this.$nextTick(() => {
         const chatbox = document.getElementsByClassName('main-container')[0]
-        chatbox.scrollTop = chatbox.scrollHeight;
+        const chatboxhide = document.getElementsByClassName('main-hide')[0]
+        if (this.isCollapse){
+          chatbox.scrollTop = chatbox.scrollHeight;
+        }else{
+          chatboxhide.scrollTop =chatboxhide.scrollHeight;
+        }
+
       })
 
     },
@@ -325,7 +328,7 @@ export default {
 /* 收起菜单栏样式 start */
 .layout-hide {
   display: flex;
-  flex-flow: wrap;
+  /*flex-flow: wrap;*/
   max-height: 100%;
   height: 80%;
 }
@@ -335,6 +338,8 @@ export default {
 .main-hide {
   flex: 0 0 80%;
   margin-left: calc((100% - 3 * 30%) / 4);
+  max-height: 100%;
+  overflow-y: scroll;
 }
 /* 收起菜单栏样式 end */
 
