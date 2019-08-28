@@ -3,7 +3,7 @@
     <!--  the start  -->
     <section class="theme-color header-container">
        <div class="slider-toggle">
-         <button class="theme-color tog-btn"  @click="toggleSlider">切换</button>
+         <button class="theme-color tog-btn"  @click="toggleSlider"><i :class="isCollapse ? 'el-icon-s-fold':'el-icon-s-unfold'"></i></button>
        </div>
        <p class="header-title">{{ this.targetUserName }}</p>
     </section>
@@ -25,25 +25,22 @@
         </ul>
       </section>
 
-      <section :class="isCollapse ? 'main-container' : 'main-hide'">
-        <ul class="chat-box">
+<!--      <section :class="isCollapse ? 'main-container' : 'main-hide'">-->
+      <div :class="isCollapse ? 'main-container' : 'main-hide'">
+        <div class="chat-box">
           <template v-for="item in messageRecords">
-            <div class="chat-container" v-if="item.type === 1">
-              <img :src="item.fromAvatar" alt="Avatar" style="width:100%;">
-              <p class="f-c">{{ item.content }}</p>
-              <span class="time-right">{{ item.time }}</span>
+            <div :class="item.type === 1 ? 'item left':'item right'">
+              <img class="header-img" :src="item.fromAvatar">
+              <div class="message">
+                <p>{{ item.content }}</p>
+<!--                <p style="clear: both">{{ item.time }}</p>-->
+              </div>
             </div>
-
-            <div class="chat-container darker" v-if="item.type === 2">
-              <img :src="item.fromAvatar" alt="Avatar" class="right" style="width:100%;">
-              <p class="f-c">{{ item.content }}</p>
-              <span class="time-left">{{ item.time }}</span>
-            </div>
-
           </template>
-        </ul>
-      </section>
-      <section class="theme-color footer-container">
+        </div>
+      </div>
+
+      <div class="theme-color footer-container">
         <div class="send-container">
 
           <textarea ref="text" v-model="message" @keyup="onKeyup" @click="showEmoji=false"></textarea>
@@ -51,7 +48,7 @@
             <span>发送(ent)</span>
           </div>
         </div>
-      </section>
+      </div>
     </div>
 
     <!--  the end  -->
@@ -268,8 +265,12 @@ export default {
   position: relative;
   top: 10px;
   left: 10px;
+  height: 450px;
+  min-height: 310px;
+  max-height: 600px;
   width: 500px;
-  height: 400px;
+  min-width: 510px;
+  max-width:900px;
   box-shadow: grey 10px 0px 10px 0px;
 }
 
@@ -304,6 +305,7 @@ export default {
   flex: 0 0 30%;
   margin-top: 24px;
   margin-left: calc((100% - 3 * 30%) / 4);
+  max-width:130px;
 }
 .main-container{
   flex: auto;
@@ -313,6 +315,7 @@ export default {
   max-width: 100%;
   overflow-x: hidden;
   padding-right: 10px;
+  /*height: 90%;*/
 }
 
 .slider-common {
@@ -334,12 +337,14 @@ export default {
 }
 .slider-hide {
   flex: 0 0 10%;
+  max-width: 60px;
 }
 .main-hide {
   flex: 0 0 80%;
   margin-left: calc((100% - 3 * 30%) / 4);
   max-height: 100%;
   overflow-y: scroll;
+  margin-bottom: 30px;
 }
 /* 收起菜单栏样式 end */
 
@@ -389,58 +394,25 @@ export default {
   background: white;
   list-style: none;
   padding-left: 0;
-  padding-right: 2em;
+  padding-right: 0.5em;
 }
 
 
-.chat-container {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-  margin-bottom: 50px;
-}
 
-.darker {
-  border-color: #ccc;
-  background-color: #ddd;
-}
+/*.time-right {*/
+/*  float: right;*/
+/*  color: #aaa;*/
+/*  font-size: 0.75em;*/
+/*}*/
 
-.chat-container::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.chat-container img {
-  float: left;
-  max-width: 40px;
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 50%;
-}
-
-.chat-container img.right {
-  float: right;
-  margin-left: 20px;
-  margin-right:0;
-}
-
-.time-right {
-  float: right;
-  color: #aaa;
-  font-size: 0.75em;
-}
-
-.time-left {
-  float: left;
-  color: #999;
-  font-size: 0.75em;
-}
-.f-c {
-  font-size: 0.85em;
-}
+/*.time-left {*/
+/*  float: left;*/
+/*  color: #999;*/
+/*  font-size: 0.75em;*/
+/*}*/
+/*.f-c {*/
+/*  font-size: 0.85em;*/
+/*}*/
 
 /*  聊天界面 end*/
 
@@ -504,12 +476,63 @@ textarea {
   outline: none;
   font-family: Microsoft YaHei;
   color: white;
-  font-size: 10px;
+  font-size: 20px;
 }
 
 .theme-color {
   background: #4E8CFF;
 }
+
+
+/*================聊天box=================*/
+
+.item {
+  display: flex;
+  margin-bottom: 10px;
+  /*width: 40%;*/
+  clear: both;
+  margin-top: 10px;
+}
+.item p {
+  white-space:normal;
+  width: 10em;
+}
+
+.left {
+  flex-direction: row;
+}
+
+.right {
+  flex-direction: row-reverse;
+}
+
+.right .message {
+  margin-right: 10px;
+}
+.left .message{
+  margin-left: 10px;
+}
+
+.header-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+}
+
+.message {
+  border-radius: 10px;
+  /*display: flex;*/
+  background: #efefef;
+  min-height: 25px;
+  padding: 9px 10px;
+  align-items: center;
+  color: #222121;
+  word-break: break-all;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+
 </style>
 
 

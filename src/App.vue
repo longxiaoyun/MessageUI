@@ -3,6 +3,7 @@
 <!--    <MessageUi />-->
 <!--    <MessageUi2 />-->
     <MessageUi3 v-bind:message-records="messageRecords" v-bind:concat-list="concatList" />
+<!--        <MessageUi4 />-->
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import HelloWorld from './components/HelloWorld'
 import MessageUi from './components/MessageUI'
 import MessageUi2 from './components/MessageUI2'
 import MessageUi3 from './components/MessageUI3'
+import MessageUi4 from './components/MessageUI4'
 
 export default {
     name: 'App',
@@ -18,7 +20,8 @@ export default {
         HelloWorld,
         MessageUi,
         MessageUi2,
-        MessageUi3
+        MessageUi3,
+        MessageUi4
     },
     data() {
         return {
